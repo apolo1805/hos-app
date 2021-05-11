@@ -1,0 +1,17 @@
+
+.p-login {
+    background-image: linear-gradient(to left, lightblue, blue);
+    height: 100vh;
+    color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-login > h1 {
+    padding: 50px;
+}
+
+Form {
+    width: 250px;
+}

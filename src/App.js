@@ -5,8 +5,23 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
+import usersJSON from './data/users.json';
+import { useState } from 'react';
 
 function App() {
+
+  const [activeUser, setActiveUser] = useState(null);
+
+  function authenticate(username, password) {
+    for(const user of usersJSON) {
+      if (user.username === username && user.password === password) {
+        setActiveUser(user);
+        console.log(user)
+        break;
+      }
+    }
+  }
+
   return (
     <div className="App">
       <HashRouter>
@@ -26,7 +41,7 @@ function App() {
             <HomePage/>
           </Route>
           <Route exact path="/login">
-            <LoginPage/>
+            <LoginPage handleSubmit={authenticate}/>
           </Route>
           <Route exact path="/signup">
             <SignupPage/>
