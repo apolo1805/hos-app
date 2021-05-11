@@ -1,0 +1,16 @@
+
+.p-home {
+    background-image:linear-gradient(to bottom, red, pink);
+    color: darkgrey;
+    height: 100vh;
+}
+
+.p-home > img {
+    width: 600px;
+}
+
+.info {
+    color: black;
+    text-align: center;
+    margin: 20px 500px;
+}
