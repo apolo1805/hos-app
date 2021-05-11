@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import usersJSON from './data/users.json';
 import { useState } from 'react';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import messagesJSON from './data/messages.json';
 
 function App() {
 
@@ -72,7 +73,7 @@ function App() {
             <SignupPage addUser={addNewUser} activeUser={activeUser}/>
           </Route>
           <Route exact path="/dashboard">
-            {activeUser ? <DashboardPage/> : <Redirect to="/"/>}
+            {activeUser ? <DashboardPage users={users} messages={messagesJSON }/> : <Redirect to="/"/>}
           </Route>
         </Switch>
       </HashRouter>
