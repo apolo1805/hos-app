@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import './LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Redirect } from 'react-router';
 
-function LoginPage({handleSubmit}) {
+function LoginPage({handleSubmit, activeUser}) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showInvalidLogin, setShowInvalidLogin] = useState(false);
+    
+    if (activeUser) {
+        return (<Redirect to="/dashboard"/>);
+    }
 
     function handleClick(e) {
         e.preventDefault();
+
         handleSubmit(username, password);
+
+        if (!activeUser) {
+            setShowInvalidLogin(true);
+        }
     }
 
     return (
@@ -21,6 +32,7 @@ function LoginPage({handleSubmit}) {
             </p>
 
             <Form>
+                {showInvalidLogin ? <Alert variant="danger">Invalid Credentials!</Alert> : null}
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control className="email-input" type="email" placeholder="Enter email" value={username} onChange={(e) => setUsername(e.target.value)}/>

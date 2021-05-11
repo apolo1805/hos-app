@@ -1,0 +1,8 @@
+
+.p-signup {
+    background-image: linear-gradient(to bottom, orange, yellow);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
