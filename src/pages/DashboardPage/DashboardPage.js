@@ -20,7 +20,7 @@ function DashboardPage({users, messages, activeUser, addMessage}) {
             <h5 className="greeting">Hello, {activeUser.fname}! Nice to see you again</h5>
 
             <div className="messages">
-                <h3>Last Messages:</h3>
+                <h3>Recent Messages:</h3>
                 
                 <ul>
                     {messages.map((message, index) => {

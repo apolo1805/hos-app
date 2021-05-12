@@ -1,7 +1,7 @@
 
 export default class MessageModel {
-    constructor(date, msg) {
-        this.date = date;
-        this.msg = msg;
+    constructor(plainMessage) {
+        this.date = plainMessage.date;
+        this.msg = plainMessage.msg;
     }
 }

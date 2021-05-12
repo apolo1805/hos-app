@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 import './LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Redirect } from 'react-router';
+import { Form, Button, Alert } from 'react-bootstrap';
 
-function LoginPage({handleSubmit, activeUser}) {
+function LoginPage({handleSubmit, users, activeUser, onLogin}) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -17,9 +17,17 @@ function LoginPage({handleSubmit, activeUser}) {
     function handleClick(e) {
         e.preventDefault();
 
-        handleSubmit(username, password);
+        let activeUser = null;
+        for(const user of users) {
+            if (user.login(username, password)) {
+                activeUser = user;
+                break;
+            }
+        }
 
-        if (!activeUser) {
+        if (activeUser) {
+            onLogin(activeUser);
+        } else {
             setShowInvalidLogin(true);
         }
     }

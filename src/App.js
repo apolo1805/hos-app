@@ -14,9 +14,9 @@ import UserModel from './model/UserModel';
 
 function App() {
 
-  const [users, setUsers] = useState(usersJSON);
+  const [users, setUsers] = useState(usersJSON.map(plainUser => new UserModel(plainUser)));
   const [activeUser, setActiveUser] = useState(null);
-  const [messages, setMessages] = useState(messagesJSON);
+  const [messages, setMessages] = useState(messagesJSON.map(plainMessage => new MessageModel(plainMessage)));
 
   function authenticate(username, password) {
     for(const user of users) {
@@ -32,7 +32,12 @@ function App() {
   }
 
   function addNewUser(user) {
-    const newUser = new UserModel(user.fname, user.lname, user.username, user.password);
+    const newUser = new UserModel({
+      "fname": user.fname,
+      "lname": user.lname,
+      "username": user.username,
+      "password": user.password
+    });
 
     for(const user of users) {
       if (user.username === newUser.username) {
@@ -52,13 +57,16 @@ function App() {
   }
 
   function addNewMessage(msg) {
-    var date = new Date;
+    var date = new Date();
     var year = date.getFullYear();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
     var day = date.getDate();
-    date = day + "/" + (parseInt(month)+1).toString() + "/" + year;
-    console.log(date)
-    const newMsg = new MessageModel(date, msg);
+    date = day + "/" + month + "/" + year;
+    
+    const newMsg = new MessageModel({
+      "date": date,
+      "msg": msg
+    });
     
     setMessages(messages.concat({
       "id": (parseInt(messages.length) + 1).toString(),
@@ -88,7 +96,7 @@ function App() {
             <HomePage/>
           </Route>
           <Route exact path="/login">
-            <LoginPage handleSubmit={authenticate} activeUser={activeUser}/>
+            <LoginPage handleSubmit={authenticate} users={users} activeUser={activeUser} onLogin={(user) => setActiveUser(user)}/>
           </Route>
           <Route exact path="/signup">
             <SignupPage addUser={addNewUser} activeUser={activeUser}/>
