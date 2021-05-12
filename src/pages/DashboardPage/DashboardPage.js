@@ -1,11 +1,12 @@
 import React from 'react';
 import './DashboardPage.css';
 
-function DashboardPage({users, messages}) {
+function DashboardPage({users, messages, activeUser}) {
 
     return (
         <div className="p-dashboard">
             <h1>Dashboard</h1>
+            <h5 className="greeting">Hello, {activeUser.fname}! Nice to see you again</h5>
 
             <p className="messages">
                 <h3>Last Messages:</h3>

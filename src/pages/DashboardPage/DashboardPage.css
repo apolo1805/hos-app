@@ -1,9 +1,20 @@
 
+.p-dashboard {
+    padding: 25px;
+    background-image: linear-gradient(to bottom, purple, lightblue);
+    height: 100vh;
+    color:deepskyblue;
+}
+
+.greeting {
+    text-align: left;
+    padding-bottom: 50px;
+}
+
 .messages{
     text-align: left;
     border: 1px dashed darkgray;
     border-radius: 15px;
     width: 500px;
     padding: 10px;
-    margin: 25px;
 }

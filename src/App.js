@@ -73,7 +73,7 @@ function App() {
             <SignupPage addUser={addNewUser} activeUser={activeUser}/>
           </Route>
           <Route exact path="/dashboard">
-            {activeUser ? <DashboardPage users={users} messages={messagesJSON }/> : <Redirect to="/"/>}
+            {activeUser ? <DashboardPage users={users} messages={messagesJSON } activeUser={activeUser}/> : <Redirect to="/"/>}
           </Route>
         </Switch>
       </HashRouter>

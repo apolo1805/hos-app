@@ -5,5 +5,12 @@
         "lname": "Levavi",
         "username": "elad@elad.com",
         "password": "1234"
+    },
+    {
+        "id": "2",
+        "fname": "John",
+        "lname": "Doe",
+        "username": "john@john.com",
+        "password": "1234"
     }
 ]

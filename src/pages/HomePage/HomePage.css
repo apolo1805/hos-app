@@ -14,3 +14,8 @@
     text-align: center;
     margin: 20px 500px;
 }
+
+.img-container {
+    width: 100%;
+    padding: 40px 0;
+}
