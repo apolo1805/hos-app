@@ -1,19 +1,22 @@
-import { Nav, Navbar } from 'react-bootstrap';
 import './App.css';
-import HomePage from './pages/HomePage/HomePage';
+import { useState } from 'react';
+import { Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
-import usersJSON from './data/users.json';
-import { useState } from 'react';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import usersJSON from './data/users.json';
 import messagesJSON from './data/messages.json';
+import MessageModel from './model/MessageModel';
+import UserModel from './model/UserModel';
 
 function App() {
 
   const [users, setUsers] = useState(usersJSON);
   const [activeUser, setActiveUser] = useState(null);
+  const [messages, setMessages] = useState(messagesJSON);
 
   function authenticate(username, password) {
     for(const user of users) {
@@ -29,7 +32,9 @@ function App() {
     console.log(users)
   }
 
-  function addNewUser(newUser) {
+  function addNewUser(user) {
+    const newUser = new UserModel(user.fname, user.lname, user.username, user.password);
+
     for(const user of users) {
       if (user.username === newUser.username) {
         return;
@@ -37,7 +42,7 @@ function App() {
         setActiveUser(newUser);
         
         setUsers(users.concat({
-          "id": parseInt(users.length) + 1,
+          "id": (parseInt(users.length) + 1).toString(),
           "fname": newUser.fname,
           "lname": newUser.lname,
           "username": newUser.username,
@@ -45,6 +50,16 @@ function App() {
         }));
       }
     }
+  }
+
+  function addNewMessage(msg) {
+    const newMsg = new MessageModel(msg);
+    
+    setMessages(messages.concat({
+      "id": (parseInt(messages.length) + 1).toString(),
+      "userId": activeUser.id,
+      "content": newMsg.msg
+    }));
   }
 
   return (
@@ -73,7 +88,7 @@ function App() {
             <SignupPage addUser={addNewUser} activeUser={activeUser}/>
           </Route>
           <Route exact path="/dashboard">
-            {activeUser ? <DashboardPage users={users} messages={messagesJSON } activeUser={activeUser}/> : <Redirect to="/"/>}
+            {activeUser ? <DashboardPage users={users} messages={messages} activeUser={activeUser} addMessage={addNewMessage}/> : <Redirect to="/"/>}
           </Route>
         </Switch>
       </HashRouter>

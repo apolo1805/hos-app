@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FormControl, InputGroup, Button } from 'react-bootstrap';
 import './DashboardPage.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
-function DashboardPage({users, messages, activeUser}) {
+function DashboardPage({users, messages, activeUser, addMessage}) {
+
+    const [msgInput, setMsgInput] = useState('');
+
+    function handleClick() {
+        addMessage(msgInput);
+        setMsgInput('');
+    }
 
     return (
         <div className="p-dashboard">
             <h1>Dashboard</h1>
             <h5 className="greeting">Hello, {activeUser.fname}! Nice to see you again</h5>
 
-            <p className="messages">
+            <div className="messages">
                 <h3>Last Messages:</h3>
-
+                {console.log(users[messages[0].userId].fname)}
                 <ul>
-                    {messages.map((message, index) => <li key={index}>{message.content}"</li>)}
+                    {messages.map((message, index) => <li key={index}>{}:{message.content}"</li>)}
                 </ul>
-            </p>
+
+                <InputGroup className="mb-3">
+                    <FormControl
+                        value={msgInput}
+                        onChange={(e) => setMsgInput(e.target.value)}
+                        placeholder="Write a message..."
+                        aria-describedby="basic-addon2"
+                    />
+                    <InputGroup.Append>
+                        <Button variant="secondary" onClick={handleClick}>Send</Button>
+                    </InputGroup.Append>
+
+                </InputGroup>
+            </div>
         </div>
     );
 }

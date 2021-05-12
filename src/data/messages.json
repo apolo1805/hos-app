@@ -1,6 +1,12 @@
 [
     {
-        "user-id": "1",
+        "id": "1",
+        "userId": "1",
         "content": "Welcome!"
+    },
+    {
+        "id": "2",
+        "userId": "2",
+        "content": "I wish to say happy holiday for eveyone."
     }
 ]
