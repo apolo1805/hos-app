@@ -26,7 +26,7 @@ function DashboardPage({users, messages, activeUser, addMessage}) {
                     {messages.map((message, index) => {
                         const name = users.filter(user => user.id === message.userId);
                             return (<li key={index}>
-                                        <b>{name[0].fname + " " + name[0].lname}</b>: "{message.content}"
+                                        <b>{name[0].fname + " " + name[0].lname}</b>, {message.date}: "{message.content}"
                                     </li>);
                         })
                     }

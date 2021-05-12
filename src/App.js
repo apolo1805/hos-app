@@ -29,7 +29,6 @@ function App() {
 
   function onLogout() {
     setActiveUser(null);
-    console.log(users)
   }
 
   function addNewUser(user) {
@@ -53,11 +52,18 @@ function App() {
   }
 
   function addNewMessage(msg) {
-    const newMsg = new MessageModel(msg);
+    var date = new Date;
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var day = date.getDate();
+    date = day + "/" + (parseInt(month)+1).toString() + "/" + year;
+    console.log(date)
+    const newMsg = new MessageModel(date, msg);
     
     setMessages(messages.concat({
       "id": (parseInt(messages.length) + 1).toString(),
       "userId": activeUser.id,
+      "date": date,
       "content": newMsg.msg
     }));
   }
@@ -70,8 +76,8 @@ function App() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                {!activeUser ? <Nav.Link href="#login">Login</Nav.Link> : ''}
-                {!activeUser ? <Nav.Link href="#signup">Signup</Nav.Link> : ''}
+                {!activeUser ? <Nav.Link href="#/login">Login</Nav.Link> : ''}
+                {!activeUser ? <Nav.Link href="#/signup">Signup</Nav.Link> : ''}
                 {activeUser ? <Nav.Link onClick={() => onLogout()}>Logout</Nav.Link> : ''}
               </Nav>
             </Navbar.Collapse>

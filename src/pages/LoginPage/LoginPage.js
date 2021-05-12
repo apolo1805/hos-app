@@ -13,7 +13,7 @@ function LoginPage({handleSubmit, activeUser}) {
     if (activeUser) {
         return (<Redirect to="/dashboard"/>);
     }
-
+    
     function handleClick(e) {
         e.preventDefault();
 
