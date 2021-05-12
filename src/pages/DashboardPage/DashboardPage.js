@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 function DashboardPage({users, messages, activeUser, addMessage}) {
 
     const [msgInput, setMsgInput] = useState('');
+    
+
 
     function handleClick() {
         addMessage(msgInput);
@@ -19,9 +21,15 @@ function DashboardPage({users, messages, activeUser, addMessage}) {
 
             <div className="messages">
                 <h3>Last Messages:</h3>
-                {console.log(users[messages[0].userId].fname)}
+                
                 <ul>
-                    {messages.map((message, index) => <li key={index}>{}:{message.content}"</li>)}
+                    {messages.map((message, index) => {
+                        const name = users.filter(user => user.id === message.userId);
+                            return (<li key={index}>
+                                        <b>{name[0].fname + " " + name[0].lname}</b>: "{message.content}"
+                                    </li>);
+                        })
+                    }
                 </ul>
 
                 <InputGroup className="mb-3">
