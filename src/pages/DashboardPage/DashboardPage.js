@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormControl, InputGroup, Button } from 'react-bootstrap';
 import './DashboardPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import TenantSignup from '../../components/TenantSignup/TenantSignup';
+import UsersContext from '../shared/UsersContext';
+import UserModel from '../../model/UserModel';
 
-function DashboardPage({users, messages, activeUser, addMessage}) {
+function DashboardPage({messages, activeUser, addMessage}) {
 
     const [msgInput, setMsgInput] = useState('');
-    
+    var users = useContext(UsersContext);
 
 
     function handleClick() {
         addMessage(msgInput);
         setMsgInput('');
     }
+
+    function createNewTenant(user) {
+        const newUser = new UserModel({
+          "id": (parseInt(users.length) + 1).toString(),
+          "fname": user.fname,
+          "lname": user.lname,
+          "username": user.email,
+          "password": user.password,
+          "street": activeUser.street,
+          "city": activeUser.city,
+          "isCommittee": false
+        });
+    
+        users = users.concat(newUser);
+        alert("New tenant user was created successfully!");
+      }
 
     return (
         <div className="p-dashboard">
@@ -50,6 +69,10 @@ function DashboardPage({users, messages, activeUser, addMessage}) {
                 <div className="border">
                     <h3>Building Address:</h3>
                     {activeUser.street}, {activeUser.city}
+                </div>
+
+                <div className="border">
+                    {activeUser.isCommittee ? <TenantSignup createTenant={createNewTenant}/> : ''}
                 </div>
             </div>
         </div>

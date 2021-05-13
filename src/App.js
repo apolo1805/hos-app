@@ -11,6 +11,7 @@ import usersJSON from './data/users.json';
 import messagesJSON from './data/messages.json';
 import MessageModel from './model/MessageModel';
 import UserModel from './model/UserModel';
+import UsersContext from './pages/shared/UsersContext';
 
 function App() {
 
@@ -40,7 +41,8 @@ function App() {
       "username": user.username,
       "password": user.password,
       "street": user.street,
-      "city": user.city
+      "city": user.city,
+      "isCommittee": true
     });
 
     setActiveUser(newUser);
@@ -80,18 +82,20 @@ function App() {
           </Navbar>
 
         <Switch>
-          <Route exact path="/">
-            <HomePage/>
-          </Route>
-          <Route exact path="/login">
-            <LoginPage handleSubmit={authenticate} users={users} activeUser={activeUser} onLogin={(user) => setActiveUser(user)}/>
-          </Route>
-          <Route exact path="/signup">
-            <SignupPage addUser={addNewUser} activeUser={activeUser}/>
-          </Route>
-          <Route exact path="/dashboard">
-            {activeUser ? <DashboardPage users={users} messages={messages} activeUser={activeUser} addMessage={addNewMessage}/> : <Redirect to="/"/>}
-          </Route>
+          <UsersContext.Provider value={users}>
+            <Route exact path="/">
+              <HomePage/>
+            </Route>
+            <Route exact path="/login">
+              <LoginPage handleSubmit={authenticate} users={users} activeUser={activeUser} onLogin={(user) => setActiveUser(user)}/>
+            </Route>
+            <Route exact path="/signup">
+              <SignupPage addUser={addNewUser} activeUser={activeUser}/>
+            </Route>
+            <Route exact path="/dashboard">
+              {activeUser ? <DashboardPage users={users} messages={messages} activeUser={activeUser} addMessage={addNewMessage}/> : <Redirect to="/"/>}
+            </Route>
+          </UsersContext.Provider>
         </Switch>
       </HashRouter>
       

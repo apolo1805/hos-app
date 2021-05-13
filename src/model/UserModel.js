@@ -10,6 +10,7 @@ export default class UserModel {
         this.#password = plainUser.password;
         this.street = plainUser.street;
         this.city = plainUser.city;
+        this.isCommittee = plainUser.isCommittee;
     }
 
     login(usr, pwd) {

@@ -33,7 +33,7 @@ function SignupPage({addUser, activeUser}) {
         <div className="p-signup">
             <h1>Signup Page</h1>
             <p>
-                Please fill in this form to sign up to HOS app:
+                Create a new committee memeber account
             </p>
             <Form>
                 {showError ? <Alert variant="danger">This email already exists!</Alert> : null}
