@@ -3,6 +3,7 @@ export default class UserModel {
     #password; // password is a private property
 
     constructor(plainUser) {
+        this.id = plainUser.id;
         this.fname = plainUser.fname;
         this.lname = plainUser.lname;
         this.username = plainUser.username;

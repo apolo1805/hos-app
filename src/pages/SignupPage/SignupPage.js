@@ -21,7 +21,7 @@ function SignupPage({addUser, activeUser}) {
     function handleClick(e) {
         e.preventDefault();
 
-        addUser(new UserModel(fname, lname, email, password));
+        addUser({fname, lname, email, password});
 
         if (!activeUser) {
             setShowError(true);

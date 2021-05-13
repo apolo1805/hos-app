@@ -1,7 +1,9 @@
 
 export default class MessageModel {
     constructor(plainMessage) {
+        this.id = plainMessage.id;
+        this.userId = plainMessage.userId;
         this.date = plainMessage.date;
-        this.msg = plainMessage.msg;
+        this.content = plainMessage.content;
     }
 }

@@ -17,6 +17,7 @@ function App() {
   const [users, setUsers] = useState(usersJSON.map(plainUser => new UserModel(plainUser)));
   const [activeUser, setActiveUser] = useState(null);
   const [messages, setMessages] = useState(messagesJSON.map(plainMessage => new MessageModel(plainMessage)));
+  
 
   function authenticate(username, password) {
     for(const user of users) {
@@ -33,27 +34,16 @@ function App() {
 
   function addNewUser(user) {
     const newUser = new UserModel({
+      "id": (parseInt(users.length) + 1).toString(),
       "fname": user.fname,
       "lname": user.lname,
       "username": user.username,
       "password": user.password
     });
 
-    for(const user of users) {
-      if (user.username === newUser.username) {
-        return;
-      } else {
-        setActiveUser(newUser);
-        
-        setUsers(users.concat({
-          "id": (parseInt(users.length) + 1).toString(),
-          "fname": newUser.fname,
-          "lname": newUser.lname,
-          "username": newUser.username,
-          "password": newUser.password
-        }));
-      }
-    }
+    setActiveUser(newUser);
+    setUsers(users.concat(newUser));
+    console.log(user)
   }
 
   function addNewMessage(msg) {
@@ -64,16 +54,13 @@ function App() {
     date = day + "/" + month + "/" + year;
     
     const newMsg = new MessageModel({
-      "date": date,
-      "msg": msg
-    });
-    
-    setMessages(messages.concat({
       "id": (parseInt(messages.length) + 1).toString(),
       "userId": activeUser.id,
       "date": date,
-      "content": newMsg.msg
-    }));
+      "content": msg
+    });
+    
+    setMessages(messages.concat(newMsg));
   }
 
   return (
