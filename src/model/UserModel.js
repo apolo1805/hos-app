@@ -8,6 +8,8 @@ export default class UserModel {
         this.lname = plainUser.lname;
         this.username = plainUser.username;
         this.#password = plainUser.password;
+        this.street = plainUser.street;
+        this.city = plainUser.city;
     }
 
     login(usr, pwd) {

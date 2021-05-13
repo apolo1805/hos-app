@@ -38,12 +38,13 @@ function App() {
       "fname": user.fname,
       "lname": user.lname,
       "username": user.username,
-      "password": user.password
+      "password": user.password,
+      "street": user.street,
+      "city": user.city
     });
 
     setActiveUser(newUser);
     setUsers(users.concat(newUser));
-    console.log(user)
   }
 
   function addNewMessage(msg) {

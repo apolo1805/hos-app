@@ -6,12 +6,17 @@
     color:deepskyblue;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .greeting {
     text-align: left;
     padding-bottom: 50px;
 }
 
-.messages{
+.border{
     text-align: left;
     border: 1px dashed darkgray;
     border-radius: 15px;

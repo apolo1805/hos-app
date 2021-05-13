@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Col, Alert } from 'react-bootstrap';
 import './SignupPage.css';
-import UserModel from '../../model/UserModel';
 import { Redirect } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -11,6 +10,8 @@ function SignupPage({addUser, activeUser}) {
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
     const [showError, setShowError] = useState(false);
     
 
@@ -21,7 +22,7 @@ function SignupPage({addUser, activeUser}) {
     function handleClick(e) {
         e.preventDefault();
 
-        addUser({fname, lname, email, password});
+        addUser({fname, lname, email, password, street, city});
 
         if (!activeUser) {
             setShowError(true);
@@ -64,39 +65,17 @@ function SignupPage({addUser, activeUser}) {
                     </Form.Group>
                 </Form.Row>
 
-                {/* <Form.Group controlId="formGridAddress1">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control placeholder="1234 Main St" />
-                </Form.Group>
-
-                <Form.Group controlId="formGridAddress2">
-                    <Form.Label>Address 2</Form.Label>
-                    <Form.Control placeholder="Apartment, studio, or floor" />
+                <Form.Group controlId="formGridStreet">
+                    <Form.Label>Street</Form.Label>
+                    <Form.Control placeholder="Street name & number" value={street} onChange={(e) => setStreet(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridCity">
                     <Form.Label>City</Form.Label>
-                    <Form.Control />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>State</Form.Label>
-                    <Form.Control as="select" defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
-                    </Form.Control>
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridZip">
-                    <Form.Label>Zip</Form.Label>
-                    <Form.Control />
+                    <Form.Control value={city} onChange={(e) => setCity(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
-
-                <Form.Group id="formGridCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
 
                 <Button variant="primary" type="submit" onClick={(e) => handleClick(e)}>
                     Submit
