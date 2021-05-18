@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Button, Form, Col } from 'react-bootstrap';
 import './TenantSignup.css';
 
-function TenantSignup({createTenant}) {
+function TenantSignup({createNewTenant}) {
 
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function createNew() {
-        createTenant({fname, lname, email, password});
+    function handleCick() {
+        createNewTenant({fname, lname, email, password});
         setFname('');
         setLname('');
         setEmail('');
@@ -49,7 +49,7 @@ function TenantSignup({createTenant}) {
                 </Form.Group>
                 </Form.Row>
                 
-                <Button onClick={() => createNew()}>Click</Button>
+                <Button onClick={() => handleCick()}>Click</Button>
             </Form>
         </div>
     );

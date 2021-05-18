@@ -6,7 +6,7 @@ import TenantSignup from '../../components/TenantSignup/TenantSignup';
 import UsersContext from '../shared/UsersContext';
 import UserModel from '../../model/UserModel';
 
-function DashboardPage({messages, activeUser, addMessage}) {
+function DashboardPage({messages, activeUser, addMessage, addNewTenant}) {
 
     const [msgInput, setMsgInput] = useState('');
     var users = useContext(UsersContext);
@@ -16,22 +16,6 @@ function DashboardPage({messages, activeUser, addMessage}) {
         addMessage(msgInput);
         setMsgInput('');
     }
-
-    function createNewTenant(user) {
-        const newUser = new UserModel({
-          "id": (parseInt(users.length) + 1).toString(),
-          "fname": user.fname,
-          "lname": user.lname,
-          "username": user.email,
-          "password": user.password,
-          "street": activeUser.street,
-          "city": activeUser.city,
-          "isCommittee": false
-        });
-    
-        users = users.concat(newUser);
-        alert("New tenant user was created successfully!");
-      }
 
     return (
         <div className="p-dashboard">
@@ -72,7 +56,7 @@ function DashboardPage({messages, activeUser, addMessage}) {
                 </div>
 
                 <div className="border">
-                    {activeUser.isCommittee ? <TenantSignup createTenant={createNewTenant}/> : ''}
+                    {activeUser.isCommittee ? <TenantSignup createNewTenant={addNewTenant}/> : ''}
                 </div>
             </div>
         </div>
