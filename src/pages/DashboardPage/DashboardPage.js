@@ -1,21 +1,14 @@
-import React, { useContext, useState } from 'react';
-import { FormControl, InputGroup, Button } from 'react-bootstrap';
+import React, { useContext } from 'react';
 import './DashboardPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import TenantSignup from '../../components/TenantSignup/TenantSignup';
 import UsersContext from '../shared/UsersContext';
-import UserModel from '../../model/UserModel';
+import Messages from '../../components/Messages/Messages';
+import BuildingAddress from '../../components/BuildingAddress/BuildingAddress';
 
 function DashboardPage({messages, activeUser, addMessage, addNewTenant}) {
 
-    const [msgInput, setMsgInput] = useState('');
     var users = useContext(UsersContext);
-
-
-    function handleClick() {
-        addMessage(msgInput);
-        setMsgInput('');
-    }
 
     return (
         <div className="p-dashboard">
@@ -23,41 +16,13 @@ function DashboardPage({messages, activeUser, addMessage, addNewTenant}) {
             <h5 className="greeting">Hello, {activeUser.fname}! Nice to see you again</h5>
             
             <div className="container">
-                <div className="border">
-                    <h3>Recent Messages:</h3>
-                    
-                    <ul>
-                        {messages.map((message, index) => {
-                            const name = users.filter(user => user.id === message.userId);
-                                return (<li key={index}>
-                                            <b>{name[0].fname + " " + name[0].lname}</b>, {message.date}: "{message.content}"
-                                        </li>);
-                            })
-                        }
-                    </ul>
+                
+                <Messages users={users} messages={messages} addMessage={addMessage}/>
 
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            value={msgInput}
-                            onChange={(e) => setMsgInput(e.target.value)}
-                            placeholder="Write a message..."
-                            aria-describedby="basic-addon2"
-                        />
-                        <InputGroup.Append>
-                            <Button variant="secondary" onClick={handleClick}>Send</Button>
-                        </InputGroup.Append>
+                <BuildingAddress activeUser={activeUser}/>
 
-                    </InputGroup>
-                </div>
+                {activeUser.isCommittee ? <TenantSignup createNewTenant={addNewTenant}/> : ''}
 
-                <div className="border">
-                    <h3>Building Address:</h3>
-                    {activeUser.street}, {activeUser.city}
-                </div>
-
-                <div className="border">
-                    {activeUser.isCommittee ? <TenantSignup createNewTenant={addNewTenant}/> : ''}
-                </div>
             </div>
         </div>
     );

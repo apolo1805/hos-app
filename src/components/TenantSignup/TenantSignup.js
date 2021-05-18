@@ -18,7 +18,7 @@ function TenantSignup({createNewTenant}) {
     }
 
     return (
-        <div className="p-tenantSignup">
+        <div className="c-tenantSignup">
             <h3>Create a new tenant account</h3>
             <Form>
                 <Form.Row>
