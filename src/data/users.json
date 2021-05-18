@@ -18,5 +18,25 @@
         "street": "Ben-Gurion 22",
         "city": "Bat-Yam",
         "isCommittee": true
+    },
+    {
+        "id": "3",
+        "fname": "Shimon",
+        "lname": "Levi",
+        "username": "shimon@shimon.com",
+        "password": "1234",
+        "street":"Hertzel 10",
+        "city": "Ramat-Gan",
+        "isCommittee": false
+    },
+    {
+        "id": "4",
+        "fname": "Itzik",
+        "lname": "Lavi",
+        "username": "itzik@itzik.com",
+        "password": "1234",
+        "street":"Hertzel 10",
+        "city": "Ramat-Gan",
+        "isCommittee": false
     }
 ]

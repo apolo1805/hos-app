@@ -19,7 +19,7 @@ function TenantSignup({createNewTenant}) {
 
     return (
         <div className="c-tenantSignup">
-            <h3>Create a new tenant account</h3>
+            <h3>New Tenant Account</h3>
             <Form>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridFname">
