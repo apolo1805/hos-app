@@ -3,12 +3,19 @@
         "id": "1",
         "userId": "1",
         "date": "12/12/2020",
-        "content": "Welcome!"
+        "content": "Welcome!",
+        "comments": [
+            "Thanks :)",
+            "Thank you"
+        ]
     },
     {
         "id": "2",
         "userId": "2",
         "date": "6/6/2020",
-        "content": "I wish to say happy holiday for eveyone."
+        "content": "I wish to say happy holiday for eveyone.",
+        "comments": [
+            "You too"
+        ]
     }
 ]

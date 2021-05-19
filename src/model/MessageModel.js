@@ -5,5 +5,6 @@ export default class MessageModel {
         this.userId = plainMessage.userId;
         this.date = plainMessage.date;
         this.content = plainMessage.content;
+        this.comments = plainMessage.comments;
     }
 }

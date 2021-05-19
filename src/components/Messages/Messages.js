@@ -5,6 +5,7 @@ import './Messages.css';
 function Messages({users, messages, addMessage}) {
 
     const [msgInput, setMsgInput] = useState('');
+    const comments = messages.comments;
 
     function handleClick() {
         addMessage(msgInput);
@@ -14,12 +15,13 @@ function Messages({users, messages, addMessage}) {
     return (
         <div className="c-messages">
             <h3>Recent Messages:</h3>
-            
+                        
             <ul>
                 {messages.map((message, index) => {
                     const name = users.filter(user => user.id === message.userId);
                         return (<li key={index}>
-                                    <b>{name[0].fname + " " + name[0].lname}</b>, {message.date}: "{message.content}"
+                                    <b>{name[0].fname + " " + name[0].lname}</b>, {message.date}: {message.content}
+                                    <ul>{message.comments.map((comment, index) => <li index={index}>{comment}</li>)}</ul>
                                 </li>);
                     })
                 }
@@ -30,10 +32,9 @@ function Messages({users, messages, addMessage}) {
                     value={msgInput}
                     onChange={(e) => setMsgInput(e.target.value)}
                     placeholder="Write a message..."
-                    aria-describedby="basic-addon2"
                 />
                 <InputGroup.Append>
-                    <Button variant="secondary" onClick={handleClick}>Send</Button>
+                    <Button variant="secondary" onClick={handleClick}>Add A Message</Button>
                 </InputGroup.Append>
 
             </InputGroup>
