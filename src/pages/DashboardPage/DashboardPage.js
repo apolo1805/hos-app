@@ -5,9 +5,9 @@ import TenantSignup from '../../components/TenantSignup/TenantSignup';
 import UsersContext from '../shared/UsersContext';
 import Messages from '../../components/Messages/Messages';
 import BuildingAddress from '../../components/BuildingAddress/BuildingAddress';
-import Tenants from '../../components/Messages/Tenants/Tenants';
+import Tenants from '../../components/Tenants/Tenants';
 
-function DashboardPage({messages, activeUser, addMessage, addNewTenant}) {
+function DashboardPage({messages, activeUser, addMessage, addNewTenant, addNewComment}) {
 
     var users = useContext(UsersContext);
 
@@ -18,7 +18,7 @@ function DashboardPage({messages, activeUser, addMessage, addNewTenant}) {
             
             <div className="container">
 
-                <Messages users={users} messages={messages} addMessage={addMessage}/>
+                <Messages users={users} messages={messages} addMessage={addMessage} addComment={addNewComment}/>
 
                 <BuildingAddress activeUser={activeUser}/>
 
