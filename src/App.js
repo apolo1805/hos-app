@@ -67,6 +67,22 @@ function App() {
     setMessages(messages.concat(newMsg));
   }
 
+  function addNewTenant(user) {
+    const newUser = new UserModel({
+      "id": (parseInt(users.length) + 1).toString(),
+      "fname": user.fname,
+      "lname": user.lname,
+      "username": user.email,
+      "password": user.password,
+      "street": activeUser.street,
+      "city": activeUser.city,
+      "isCommittee": false
+    });
+
+    setUsers(users.concat(newUser));
+    alert("New tenant user was created successfully!");
+  }
+
   return (
     <div className="App">
       <HashRouter>
@@ -94,7 +110,7 @@ function App() {
               <SignupPage addUser={addNewUser} activeUser={activeUser}/>
             </Route>
             <Route exact path="/dashboard">
-              {activeUser ? <DashboardPage users={users} messages={messages} activeUser={activeUser} addMessage={addNewMessage}/> : <Redirect to="/"/>}
+              {activeUser ? <DashboardPage users={users} messages={messages} activeUser={activeUser} addMessage={addNewMessage} addNewTenant={addNewTenant}/> : <Redirect to="/"/>}
             </Route>
           </UsersContext.Provider>
         </Switch>

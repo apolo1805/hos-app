@@ -1,37 +1,15 @@
-import React, { useContext, useState } from 'react';
-import { FormControl, InputGroup, Button } from 'react-bootstrap';
+import React, { useContext } from 'react';
 import './DashboardPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import TenantSignup from '../../components/TenantSignup/TenantSignup';
 import UsersContext from '../shared/UsersContext';
-import UserModel from '../../model/UserModel';
+import Messages from '../../components/Messages/Messages';
+import BuildingAddress from '../../components/BuildingAddress/BuildingAddress';
+import Tenants from '../../components/Tenants/Tenants';
 
-function DashboardPage({messages, activeUser, addMessage}) {
+function DashboardPage({messages, activeUser, addMessage, addNewTenant, addNewComment}) {
 
-    const [msgInput, setMsgInput] = useState('');
     var users = useContext(UsersContext);
-
-
-    function handleClick() {
-        addMessage(msgInput);
-        setMsgInput('');
-    }
-
-    function createNewTenant(user) {
-        const newUser = new UserModel({
-          "id": (parseInt(users.length) + 1).toString(),
-          "fname": user.fname,
-          "lname": user.lname,
-          "username": user.email,
-          "password": user.password,
-          "street": activeUser.street,
-          "city": activeUser.city,
-          "isCommittee": false
-        });
-    
-        users = users.concat(newUser);
-        alert("New tenant user was created successfully!");
-      }
 
     return (
         <div className="p-dashboard">
@@ -43,41 +21,15 @@ function DashboardPage({messages, activeUser, addMessage}) {
             </h5>
             
             <div className="container">
-                <div className="border">
-                    <h3>Recent Messages:</h3>
-                    
-                    <ul>
-                        {messages.map((message, index) => {
-                            const name = users.filter(user => user.id === message.userId);
-                                return (<li key={index}>
-                                            <b>{name[0].fname + " " + name[0].lname}</b>, {message.date}: "{message.content}"
-                                        </li>);
-                            })
-                        }
-                    </ul>
 
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            value={msgInput}
-                            onChange={(e) => setMsgInput(e.target.value)}
-                            placeholder="Write a message..."
-                            aria-describedby="basic-addon2"
-                        />
-                        <InputGroup.Append>
-                            <Button variant="secondary" onClick={handleClick}>Send</Button>
-                        </InputGroup.Append>
+                <Messages users={users} messages={messages} addMessage={addMessage} addComment={addNewComment}/>
 
-                    </InputGroup>
-                </div>
+                <BuildingAddress activeUser={activeUser}/>
 
-                <div className="border">
-                    <h3>Building Address:</h3>
-                    {activeUser.street}, {activeUser.city}
-                </div>
+                <Tenants users={users} address={activeUser.address} city={activeUser.city} fname={activeUser.fname} lname={activeUser.lname}/>
 
-                <div className="border">
-                    {activeUser.isCommittee ? <TenantSignup createTenant={createNewTenant}/> : ''}
-                </div>
+                {activeUser.isCommittee ? <TenantSignup createNewTenant={addNewTenant}/> : ''}
+
             </div>
         </div>
     );

@@ -1,0 +1,8 @@
+
+.c-buildingAddress {
+    text-align: left;
+    border: 1px dashed darkgray;
+    border-radius: 15px;
+    width: 500px;
+    padding: 10px;
+}
