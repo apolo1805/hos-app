@@ -43,7 +43,7 @@ function App() {
       "password": user.password,
       "street": user.street,
       "city": user.city,
-      "isCommittee": true
+      "isCommittee": user.isCommittee
     });
 
     setActiveUser(newUser);

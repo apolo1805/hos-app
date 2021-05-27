@@ -36,7 +36,11 @@ function DashboardPage({messages, activeUser, addMessage}) {
     return (
         <div className="p-dashboard">
             <h1>Dashboard</h1>
-            <h5 className="greeting">Hello, {activeUser.fname}! Nice to see you again</h5>
+            <h5 className="greeting">
+                Hello, {activeUser.isCommittee ?
+                    activeUser.fname + " " + activeUser.lname :
+                        activeUser.lname + " Family"}! Nice to see you again
+            </h5>
             
             <div className="container">
                 <div className="border">

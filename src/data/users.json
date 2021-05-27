@@ -5,18 +5,18 @@
         "lname": "Levavi",
         "username": "elad@elad.com",
         "password": "1234",
-        "street": "Hertzel 10",
-        "city": "Ramat-Gan",
+        "location": "Hertzel 10, Ramat-Gan",
+        "apartment": 13,
         "isCommittee": true
     },
     {
         "id": "2",
-        "fname": "John",
+        "fname": "",
         "lname": "Doe",
         "username": "john@john.com",
         "password": "1234",
-        "street": "Ben-Gurion 22",
-        "city": "Bat-Yam",
-        "isCommittee": true
+        "street": "Ben-Gurion 22, Bat-Yam",
+        "apartment": 22,
+        "isCommittee": false
     }
 ]

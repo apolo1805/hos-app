@@ -10,9 +10,10 @@ function SignupPage({addUser, activeUser}) {
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [street, setStreet] = useState('');
-    const [city, setCity] = useState('');
+    const [address, setAddress] = useState('');
+    const [apartment, setApartment] = useState('');
     const [showError, setShowError] = useState(false);
+    const [isCommittee, setCommittee] = useState(false);
     
 
     if (activeUser) {
@@ -22,7 +23,7 @@ function SignupPage({addUser, activeUser}) {
     function handleClick(e) {
         e.preventDefault();
 
-        addUser({fname, lname, email, password, street, city});
+        addUser({fname, lname, email, password, address, apartment, isCommittee});
 
         if (!activeUser) {
             setShowError(true);
@@ -38,9 +39,18 @@ function SignupPage({addUser, activeUser}) {
             <Form>
                 {showError ? <Alert variant="danger">This email already exists!</Alert> : null}
 
+                {isCommittee ?
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridFname">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control type="fname" placeholder="Enter your first name" value={fname} onChange={(e) => setFname(e.target.value)}/>
+                        </Form.Group>
+                    </Form.Row> : ''
+                }
+
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridLname">
-                    <Form.Label>Family Name</Form.Label>
+                    <Form.Label>Last Name</Form.Label>
                     <Form.Control type="lname" placeholder="Enter your last name" value={lname} onChange={(e) => setLname(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
@@ -59,15 +69,28 @@ function SignupPage({addUser, activeUser}) {
                     </Form.Group>
                 </Form.Row>
 
-                <Form.Group controlId="formGridStreet">
-                    <Form.Label>Building Address</Form.Label>
-                    <Form.Control placeholder="Street and city" value={street} onChange={(e) => setStreet(e.target.value)}/>
-                </Form.Group>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formGridAddress">
+                        <Form.Label>Building Address</Form.Label>
+                        <Form.Control placeholder="Street and city" value={address} onChange={(e) => setAddress(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
 
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>Apartment Number</Form.Label>
-                    <Form.Control type="number" min="0" placeholder="Your apartment number" value={city} onChange={(e) => setCity(e.target.value)}/>
+                    <Form.Group as={Col} controlId="formGridApartment">
+                        <Form.Label>Apartment Number</Form.Label>
+                        <Form.Control type="number" min="0" placeholder="Your apartment number" value={apartment} onChange={(e) => setApartment(e.target.value)}/>
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formUserType">
+                        <Form.Check
+                            type="switch"
+                            id="user-switch"
+                            onChange={() => setCommittee(!isCommittee)}
+                            label={isCommittee ? "Committee" : "Tenant"}
+                        />
                     </Form.Group>
                 </Form.Row>
 
