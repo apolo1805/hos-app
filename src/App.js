@@ -19,6 +19,7 @@ function App() {
   const [activeUser, setActiveUser] = useState(null);
   const [messages, setMessages] = useState(messagesJSON.map(plainMessage => new MessageModel(plainMessage)));
   
+  const homeRef = activeUser ? "" : "/";
 
   function authenticate(username, password) {
     for(const user of users) {
@@ -70,7 +71,7 @@ function App() {
     <div className="App">
       <HashRouter>
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand>HOS App</Navbar.Brand>
+            <Navbar.Brand href={homeRef}>HOS App</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
@@ -84,7 +85,7 @@ function App() {
         <Switch>
           <UsersContext.Provider value={users}>
             <Route exact path="/">
-              <HomePage/>
+              {!activeUser ? <HomePage/> : ''}
             </Route>
             <Route exact path="/login">
               <LoginPage handleSubmit={authenticate} users={users} activeUser={activeUser} onLogin={(user) => setActiveUser(user)}/>
@@ -98,7 +99,6 @@ function App() {
           </UsersContext.Provider>
         </Switch>
       </HashRouter>
-      
     </div>
   );
 }

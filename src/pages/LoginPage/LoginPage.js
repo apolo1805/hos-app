@@ -36,7 +36,7 @@ function LoginPage({handleSubmit, users, activeUser, onLogin}) {
         <div className="p-login">
             <h1>Login Page</h1>
             <p>
-                Please enter your email address and password to login to HOS app
+                Enter your email address and password to login
             </p>
 
             <Form>
@@ -52,7 +52,7 @@ function LoginPage({handleSubmit, users, activeUser, onLogin}) {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" onClick={handleClick}>
-                    Submit
+                    Login
                 </Button>
             </Form>
         </div>

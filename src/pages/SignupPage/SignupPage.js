@@ -37,17 +37,11 @@ function SignupPage({addUser, activeUser}) {
             </p>
             <Form>
                 {showError ? <Alert variant="danger">This email already exists!</Alert> : null}
-                <Form.Row>
-                    <Form.Group as={Col} controlId="formGridFname">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control type="fname" placeholder="Enter first name" value={fname} onChange={(e) => setFname(e.target.value)}/>
-                    </Form.Group>
-                </Form.Row>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridLname">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="lname" placeholder="Enter last name" value={lname} onChange={(e) => setLname(e.target.value)}/>
+                    <Form.Label>Family Name</Form.Label>
+                    <Form.Control type="lname" placeholder="Enter your last name" value={lname} onChange={(e) => setLname(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
 
@@ -66,19 +60,19 @@ function SignupPage({addUser, activeUser}) {
                 </Form.Row>
 
                 <Form.Group controlId="formGridStreet">
-                    <Form.Label>Street</Form.Label>
-                    <Form.Control placeholder="Street name & number" value={street} onChange={(e) => setStreet(e.target.value)}/>
+                    <Form.Label>Building Address</Form.Label>
+                    <Form.Control placeholder="Street and city" value={street} onChange={(e) => setStreet(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control value={city} onChange={(e) => setCity(e.target.value)}/>
+                    <Form.Label>Apartment Number</Form.Label>
+                    <Form.Control type="number" min="0" placeholder="Your apartment number" value={city} onChange={(e) => setCity(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
 
                 <Button variant="primary" type="submit" onClick={(e) => handleClick(e)}>
-                    Submit
+                    Signup
                 </Button>
             </Form>
         </div>
